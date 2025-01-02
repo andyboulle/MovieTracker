@@ -29,11 +29,11 @@ function App(): React.JSX.Element {
     { 'id': 21, 'title': 'Movie 20', 'score': 8.2 },
     { 'id': 22, 'title': 'Movie 21', 'score': 7.5 },
   ]);
-  let wantToWatchMovies = [
+  const [wantToWatchMovies, setWantToWatchMovies] = useState([
     { 'id': 1, 'title': 'Movie 4' },
     { 'id': 2, 'title': 'Movie 5' },
     { 'id': 3, 'title': 'Movie 6' }
-  ];
+  ]);
 
   let [activeTab, setActiveTab] = useState(
     <WatchedView 
@@ -46,6 +46,34 @@ function App(): React.JSX.Element {
   // Change the active tab to the view passed
   function handleChangeTab(view: React.JSX.Element) {
     setActiveTab(view);
+  }
+
+  // Add a new movie to the watched movies list
+  // TODO: Add error handling for the following scenarios:
+  // 1. If the title is empty
+  // 2. If the score is not a number
+  // 3. If the score is empty
+  // 4. If the score is not between 0 and 10
+  // 5. If the title is already in the watched movies list
+  function handleAddMovieToWatched(title: string, score:number) {
+    let newMovie = {
+      id: watchedMovies.length + 2,
+      title: title,
+      score: score
+    }
+    setWatchedMovies([...watchedMovies, newMovie]);
+  }
+
+  // Add a new movie to the want to watch movies list
+  // TODO: Add error handling for the following scenarios:
+  // 1. If the title is empty
+  // 2. If the title is already in the want to watch movies list
+  function handleAddToWantToWatch(title: string) {
+    let newMovie = {
+      id: wantToWatchMovies.length + 2,
+      title: title
+    }
+    setWantToWatchMovies([...wantToWatchMovies, newMovie]);
   }
 
   // Update the passed movie's title and/or score
@@ -99,6 +127,8 @@ function App(): React.JSX.Element {
           changeTab={handleChangeTab} 
           updateMovie={handleUpdateWatchedMovie} 
           deleteWatchedMovie={handleDeleteWatchedMovie}
+          addMovieToWatched={handleAddMovieToWatched}
+          addMovieToWantToWatch={handleAddToWantToWatch}
         />
       </View>
     </SafeAreaView>

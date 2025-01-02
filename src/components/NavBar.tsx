@@ -9,10 +9,12 @@ interface NavBarProps {
     watchedMovies: Array<{ id: number, title: string; score: number }>;
     changeTab: (view: React.JSX.Element) => void,
     updateMovie: (id: number, title: string, score: number) => void,
-    deleteWatchedMovie: (id: number) => void
+    deleteWatchedMovie: (id: number) => void,
+    addMovieToWatched: (title: string, score: number) => void,
+    addMovieToWantToWatch: (title: string) => void
 }
 
-export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWatchedMovie }: NavBarProps): React.JSX.Element {
+export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWatchedMovie, addMovieToWatched, addMovieToWantToWatch }: NavBarProps): React.JSX.Element {
     return (
         <View style={styles.container}>
             <TouchableOpacity 
@@ -30,7 +32,12 @@ export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWa
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.tab} 
-                onPress={() => changeTab(<AddMovieView />)}
+                onPress={() => changeTab(
+                    <AddMovieView 
+                        addMovieToWatched={addMovieToWatched}
+                        addMovieToWantToWatch={addMovieToWantToWatch}
+                    />
+                )}
             >
                 <FontAwesomeIcon icon={faSquarePlus} />
                 <Text>Add Movie</Text>
