@@ -1,39 +1,13 @@
-import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Alert, SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import TitleCard from './components/TitleCard';
 import NavBar from './components/NavBar';
 import WatchedView from './components/WatchedView';
+import WantToWatchView from './components/WantToWatchView';
 
 function App(): React.JSX.Element {
-  const [watchedMovies, setWatchedMovies] = useState([
-    { 'id': 1, 'title': 'Movie 1', 'score': 6.8 },
-    { 'id': 2, 'title': 'Movie 2', 'score': 8.2 },
-    { 'id': 3, 'title': 'Movie 3', 'score': 7.5 },
-    { 'id': 4, 'title': 'Movie 4', 'score': 6.8 },
-    { 'id': 5, 'title': 'Movie 5', 'score': 8.2 },
-    { 'id': 6, 'title': 'Movie 6', 'score': 7.5 },
-    { 'id': 7, 'title': 'Movie 7', 'score': 6.8 },
-    { 'id': 8, 'title': 'Movie 8', 'score': 8.2 },
-    { 'id': 9, 'title': 'Movie 9', 'score': 7.5 },
-    { 'id': 10, 'title': 'Movie 10', 'score': 6.8 },
-    { 'id': 12, 'title': 'Movie 11', 'score': 8.2 },
-    { 'id': 13, 'title': 'Movie 12', 'score': 7.5 },
-    { 'id': 14, 'title': 'Movie 13', 'score': 6.8 },
-    { 'id': 15, 'title': 'Movie 14', 'score': 8.2 },
-    { 'id': 16, 'title': 'Movie 15', 'score': 7.5 },
-    { 'id': 17, 'title': 'Movie 16', 'score': 6.8 },
-    { 'id': 18, 'title': 'Movie 17', 'score': 8.2 },
-    { 'id': 19, 'title': 'Movie 18', 'score': 7.5 },
-    { 'id': 20, 'title': 'Movie 19', 'score': 6.8 },
-    { 'id': 21, 'title': 'Movie 20', 'score': 8.2 },
-    { 'id': 22, 'title': 'Movie 21', 'score': 7.5 },
-  ]);
-  const [wantToWatchMovies, setWantToWatchMovies] = useState([
-    { 'id': 1, 'title': 'Movie 4' },
-    { 'id': 2, 'title': 'Movie 5' },
-    { 'id': 3, 'title': 'Movie 6' }
-  ]);
+  const [watchedMovies, setWatchedMovies] = useState([]);
+  const [wantToWatchMovies, setWantToWatchMovies] = useState([]);
 
   let [activeTab, setActiveTab] = useState(
     <WatchedView 
@@ -76,7 +50,7 @@ function App(): React.JSX.Element {
     setWantToWatchMovies([...wantToWatchMovies, newMovie]);
   }
 
-  // Update the passed movie's title and/or score
+  // Update the passed movie's title and/or score in watched movies list
   // TODO: Add error handling for the following scenarios:
   // 1. If the title is empty
   // 2. If the score is not a number
@@ -113,6 +87,40 @@ function App(): React.JSX.Element {
     );
   }
 
+  // Update the passed movie's title in want to watch list
+  // TODO: Add error handling for the following scenarios:
+  // 1. If the title is empty
+  // 2. If the title is already in the want to watch movies list
+  function handleUpdateWantToWatchMovie(id: number, title: string) {
+    let updatedMovies = wantToWatchMovies.map(movie => {
+      if (movie.id === id) {
+        return { ...movie, title: title };
+      }
+      return movie;
+    });
+    setWantToWatchMovies(updatedMovies);
+    setActiveTab(
+      <WantToWatchView 
+        wantToWatchMovies={updatedMovies}
+        updateMovie={handleUpdateWantToWatchMovie}
+        deleteMovie={handleDeleteWantToWatchMovie}
+      />
+    )
+  }
+
+  // Delete the movie with the passed id from the want to watch list
+  function handleDeleteWantToWatchMovie(id: number) {
+    let updatedMovies = wantToWatchMovies.filter(movie => movie.id !== id);
+    setWantToWatchMovies(updatedMovies);
+    setActiveTab(
+      <WantToWatchView 
+        wantToWatchMovies={updatedMovies}
+        updateMovie={handleUpdateWantToWatchMovie}
+        deleteMovie={handleDeleteWantToWatchMovie}
+      />
+    )
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleCardContainer}>
@@ -124,11 +132,14 @@ function App(): React.JSX.Element {
       <View style={styles.navBarContainer}>
         <NavBar 
           watchedMovies={watchedMovies} 
+          wantToWatchMovies={wantToWatchMovies}
           changeTab={handleChangeTab} 
-          updateMovie={handleUpdateWatchedMovie} 
+          updateWatchedMovie={handleUpdateWatchedMovie} 
           deleteWatchedMovie={handleDeleteWatchedMovie}
           addMovieToWatched={handleAddMovieToWatched}
           addMovieToWantToWatch={handleAddToWantToWatch}
+          updateWantToWatchMovie={handleUpdateWantToWatchMovie}
+          deleteWantToWatchMovie={handleDeleteWantToWatchMovie}
         />
       </View>
     </SafeAreaView>

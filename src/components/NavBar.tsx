@@ -6,15 +6,18 @@ import AddMovieView from './AddMovieView';
 import WantToWatchView from './WantToWatchView';
 
 interface NavBarProps {
-    watchedMovies: Array<{ id: number, title: string; score: number }>;
+    watchedMovies: Array<{ id: number, title: string; score: number }>,
+    wantToWatchMovies: Array<{ id: number, title: string }>,
     changeTab: (view: React.JSX.Element) => void,
-    updateMovie: (id: number, title: string, score: number) => void,
+    updateWatchedMovie: (id: number, title: string, score: number) => void,
     deleteWatchedMovie: (id: number) => void,
     addMovieToWatched: (title: string, score: number) => void,
     addMovieToWantToWatch: (title: string) => void
+    updateWantToWatchMovie: (id: number, title: string) => void,
+    deleteWantToWatchMovie: (id: number) => void
 }
 
-export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWatchedMovie, addMovieToWatched, addMovieToWantToWatch }: NavBarProps): React.JSX.Element {
+export default function NavBar({ watchedMovies, wantToWatchMovies, changeTab, updateWatchedMovie, deleteWatchedMovie, addMovieToWatched, addMovieToWantToWatch, updateWantToWatchMovie, deleteWantToWatchMovie }: NavBarProps): React.JSX.Element {
     return (
         <View style={styles.container}>
             <TouchableOpacity 
@@ -22,7 +25,7 @@ export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWa
                 onPress={() => changeTab(
                     <WatchedView 
                         watchedMovies={watchedMovies} 
-                        updateMovie={updateMovie} 
+                        updateMovie={updateWatchedMovie} 
                         deleteMovie={deleteWatchedMovie}
                     />
                 )}
@@ -44,7 +47,13 @@ export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWa
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.tab} 
-                onPress={() => changeTab(<WantToWatchView />)}
+                onPress={() => changeTab(
+                    <WantToWatchView 
+                        wantToWatchMovies={wantToWatchMovies}
+                        updateMovie={updateWantToWatchMovie}
+                        deleteMovie={deleteWantToWatchMovie}
+                    />
+                )}
             >
                 <FontAwesomeIcon icon={faClock} />
                 <Text>Want to Watch</Text>
