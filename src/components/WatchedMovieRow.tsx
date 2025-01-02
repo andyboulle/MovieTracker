@@ -1,14 +1,15 @@
-import {Button, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, TextInput, Button, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
 
 interface WatchedMovieRowProps {
     movie: { id: number, title: string, score: number },
-    updateMovie: (id: number, title: string, score: number) => void
+    updateMovie: (id: number, title: string, score: number) => void,
+    deleteMovie: (id: number) => void
 }
 
-export default function WatchedMovieRow({ movie, updateMovie }: WatchedMovieRowProps): React.JSX.Element {
+export default function WatchedMovieRow({ movie, updateMovie, deleteMovie }: WatchedMovieRowProps): React.JSX.Element {
     const [modalVisible, setModalVisible] = useState(false);
     const [title, setTitle] = useState(movie.title);
     const [score, setScore] = useState(movie.score.toString());
@@ -17,17 +18,23 @@ export default function WatchedMovieRow({ movie, updateMovie }: WatchedMovieRowP
         updateMovie(movie.id, title, parseFloat(score));
         setModalVisible(false);
     };
-    
+
+    const handleDelete = () => {
+        deleteMovie(movie.id);
+    }
+
     return (
-        <View>
-            <Text>{movie.title}</Text>
-            <Text>{movie.score}</Text>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <FontAwesomeIcon icon={faPenToSquare} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <FontAwesomeIcon icon={faTrash} />
-            </TouchableOpacity>
+        <View style={styles.rowContainer}>
+            <Text style={styles.movieTitle}>{movie.title}</Text>
+            <Text style={styles.movieScore}>{movie.score}</Text>
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleDelete()}>
+                    <FontAwesomeIcon icon={faTrash} />
+                </TouchableOpacity>
+            </View>
 
             <Modal
                 animationType="slide"
@@ -56,10 +63,33 @@ export default function WatchedMovieRow({ movie, updateMovie }: WatchedMovieRowP
                 </View>
             </Modal>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
+    rowContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+    },
+    movieTitle: {
+        flex: 3,
+        fontSize: 16,
+    },
+    movieScore: {
+        flex: 1,
+        fontSize: 16,
+        textAlign: 'center',
+        marginRight: 10, // Add margin to separate from icons
+    },
+    iconContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
     modalContainer: {
         flex: 1,
         justifyContent: 'center',

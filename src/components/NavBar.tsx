@@ -8,15 +8,22 @@ import WantToWatchView from './WantToWatchView';
 interface NavBarProps {
     watchedMovies: Array<{ id: number, title: string; score: number }>;
     changeTab: (view: React.JSX.Element) => void,
-    updateMovie: (id: number, title: string, score: number) => void
+    updateMovie: (id: number, title: string, score: number) => void,
+    deleteWatchedMovie: (id: number) => void
 }
 
-export default function NavBar({ watchedMovies, changeTab, updateMovie }: NavBarProps): React.JSX.Element {
+export default function NavBar({ watchedMovies, changeTab, updateMovie, deleteWatchedMovie }: NavBarProps): React.JSX.Element {
     return (
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.tab} 
-                onPress={() => changeTab(<WatchedView watchedMovies={watchedMovies} updateMovie={updateMovie}/>)}
+                onPress={() => changeTab(
+                    <WatchedView 
+                        watchedMovies={watchedMovies} 
+                        updateMovie={updateMovie} 
+                        deleteMovie={deleteWatchedMovie}
+                    />
+                )}
             >
                 <FontAwesomeIcon icon={faCircleCheck} />
                 <Text>Watched</Text>
