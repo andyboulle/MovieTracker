@@ -6,7 +6,37 @@ import AddMovieView from './AddMovieView';
 import WantToWatchView from './WantToWatchView';
 
 interface NavBarProps {
-    handleChangeTab: (view: React.JSX.Element) => void
+    watchedMovies: Array<{ id: number, title: string; score: number }>;
+    changeTab: (view: React.JSX.Element) => void,
+    updateMovie: (id: number, title: string, score: number) => void
+}
+
+export default function NavBar({ watchedMovies, changeTab, updateMovie }: NavBarProps): React.JSX.Element {
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity 
+                style={styles.tab} 
+                onPress={() => changeTab(<WatchedView watchedMovies={watchedMovies} updateMovie={updateMovie}/>)}
+            >
+                <FontAwesomeIcon icon={faCircleCheck} />
+                <Text>Watched</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                style={styles.tab} 
+                onPress={() => changeTab(<AddMovieView />)}
+            >
+                <FontAwesomeIcon icon={faSquarePlus} />
+                <Text>Add Movie</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                style={styles.tab} 
+                onPress={() => changeTab(<WantToWatchView />)}
+            >
+                <FontAwesomeIcon icon={faClock} />
+                <Text>Want to Watch</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -23,22 +53,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
-export default function NavBar({ handleChangeTab }: NavBarProps): React.JSX.Element {
-    return (
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.tab} onPress={() => handleChangeTab(<WatchedView />)}>
-                <FontAwesomeIcon icon={faCircleCheck} />
-                <Text>Watched</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab} onPress={() => handleChangeTab(<AddMovieView />)}>
-                <FontAwesomeIcon icon={faSquarePlus} />
-                <Text>Add Movie</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab} onPress={() => handleChangeTab(<WantToWatchView />)}>
-                <FontAwesomeIcon icon={faClock} />
-                <Text>Want to Watch</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
