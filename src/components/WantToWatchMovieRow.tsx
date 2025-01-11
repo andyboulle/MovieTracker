@@ -32,10 +32,10 @@ export default function WantToWatchMovieRow({ movie, updateMovie, deleteMovie }:
         <View style={styles.rowContainer}>
             <Text style={styles.movieTitle}>{movie.title}</Text>
             <View style={styles.iconContainer}>
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <TouchableOpacity style={styles.icon} onPress={() => setModalVisible(true)}>
                     <FontAwesomeIcon icon={faPenToSquare} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleDelete}>
+                <TouchableOpacity style={styles.icon} onPress={handleDelete}>
                     <FontAwesomeIcon icon={faTrash} />
                 </TouchableOpacity>
             </View>
@@ -73,14 +73,16 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
     },
     movieTitle: {
-        flex: 1,
+        flex: 3,
         fontSize: 16,
-        textAlign: 'left',
     },
     iconContainer: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    icon: {
+        marginHorizontal: 10,
     },
     modalContainer: {
         flex: 1,
