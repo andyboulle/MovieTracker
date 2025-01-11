@@ -6,15 +6,15 @@ import AddMovieView from './AddMovieView';
 import WantToWatchView from './WantToWatchView';
 
 interface NavBarProps {
-    watchedMovies: Array<{ id: number, title: string; score: number }>,
-    wantToWatchMovies: Array<{ id: number, title: string }>,
+    watchedMovies: Array<{ id: string, title: string; score: number }>,
+    wantToWatchMovies: Array<{ id: string, title: string }>,
     changeTab: (view: React.JSX.Element) => void,
-    updateWatchedMovie: (id: number, title: string, score: number) => void,
-    deleteWatchedMovie: (id: number) => void,
+    updateWatchedMovie: (id: string, title: string, score: number) => void,
+    deleteWatchedMovie: (id: string) => void,
     addMovieToWatched: (title: string, score: number) => void,
     addMovieToWantToWatch: (title: string) => void
-    updateWantToWatchMovie: (id: number, title: string) => void,
-    deleteWantToWatchMovie: (id: number) => void
+    updateWantToWatchMovie: (id: string, title: string) => void,
+    deleteWantToWatchMovie: (id: string) => void
 }
 
 export default function NavBar({ watchedMovies, wantToWatchMovies, changeTab, updateWatchedMovie, deleteWatchedMovie, addMovieToWatched, addMovieToWantToWatch, updateWantToWatchMovie, deleteWantToWatchMovie }: NavBarProps): React.JSX.Element {

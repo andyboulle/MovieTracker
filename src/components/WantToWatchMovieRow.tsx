@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface WantToWatchMovieRowProps {
-    movie: { id: number, title: string };
-    updateMovie: (id: number, title: string) => void;
-    deleteMovie: (id: number) => void;
+    movie: { id: string, title: string };
+    updateMovie: (id: string, title: string) => void;
+    deleteMovie: (id: string) => void;
 }
 
 export default function WantToWatchMovieRow({ movie, updateMovie, deleteMovie }: WantToWatchMovieRowProps): React.JSX.Element {

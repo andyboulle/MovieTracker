@@ -2,9 +2,9 @@ import { View, Text, FlatList, StyleSheet } from 'react-native'
 import WatchedMovieRow from './WatchedMovieRow';
 
 interface WatchedViewProps {
-    watchedMovies: Array<{ id: number, title: string; score: number }>,
-    updateMovie: (id: number, title: string, score: number) => void,
-    deleteMovie: (id: number) => void
+    watchedMovies: Array<{ id: string, title: string; score: number }>,
+    updateMovie: (id: string, title: string, score: number) => void,
+    deleteMovie: (id: string) => void
 }
 
 export default function WatchedView({ watchedMovies, updateMovie, deleteMovie }: WatchedViewProps): React.JSX.Element {

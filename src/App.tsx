@@ -22,92 +22,89 @@ function App(): React.JSX.Element {
     setActiveTab(view);
   }
 
-  function handleAddMovieToWatched(title: string, score:number) {
+  function handleAddMovieToWatched(title: string, score: number) {
     let newMovie = {
-      id: watchedMovies.length + 2,
+      id: Date.now().toString(), // Use timestamp as a unique id
       title: title,
       score: score
     }
-    setWatchedMovies([...watchedMovies, newMovie]);
+    setWatchedMovies(prevMovies => [...prevMovies, newMovie]);
   }
 
   function handleAddToWantToWatch(title: string) {
     let newMovie = {
-      id: wantToWatchMovies.length + 2,
+      id: Date.now().toString(), // Use timestamp as a unique id
       title: title
     }
-    setWantToWatchMovies([...wantToWatchMovies, newMovie]);
+    setWantToWatchMovies(prevMovies => [...prevMovies, newMovie]);
   }
 
-  // Update the passed movie's title and/or score in watched movies list
-  // TODO: Add error handling for the following scenarios:
-  // 1. If the title is empty
-  // 2. If the score is not a number
-  // 3. If the score is empty
-  // 4. If the score is not between 0 and 10
-  // 5. If the title is already in the watched movies list
-  function handleUpdateWatchedMovie(id: number, title: string, score: number) {
-    let updatedMovies = watchedMovies.map(movie => {
-      if (movie.id === id) {
-        return { ...movie, title: title, score: score };
-      }
-      return movie;
+  function handleUpdateWatchedMovie(id: string, title: string, score: number) {
+    setWatchedMovies(prevMovies => {
+      let updatedMovies = prevMovies.map(movie => {
+        if (movie.id === id) {
+          return { ...movie, title: title, score: score };
+        }
+        return movie;
+      });
+      setActiveTab(
+        <WatchedView 
+          watchedMovies={updatedMovies} 
+          updateMovie={handleUpdateWatchedMovie} 
+          deleteMovie={handleDeleteWatchedMovie}
+        />
+      );
+      return updatedMovies;
     });
-    setWatchedMovies(updatedMovies);
-    setActiveTab(
-      <WatchedView 
-        watchedMovies={updatedMovies} 
-        updateMovie={handleUpdateWatchedMovie} 
-        deleteMovie={handleDeleteWatchedMovie}
-      />
-    );
   }
 
   // Delete the movie with the passed id from the watched movies list
-  function handleDeleteWatchedMovie(id: number) {
-    let updatedMovies = watchedMovies.filter(movie => movie.id !== id);
-    setWatchedMovies(updatedMovies);
-    setActiveTab(
-      <WatchedView 
-        watchedMovies={updatedMovies} 
-        updateMovie={handleUpdateWatchedMovie} 
-        deleteMovie={handleDeleteWatchedMovie}
-      />
-    );
+  function handleDeleteWatchedMovie(id: string) {
+    setWatchedMovies(prevMovies => {
+      let updatedMovies = prevMovies.filter(movie => movie.id !== id);
+      setActiveTab(
+        <WatchedView 
+          watchedMovies={updatedMovies} 
+          updateMovie={handleUpdateWatchedMovie} 
+          deleteMovie={handleDeleteWatchedMovie}
+        />
+      );
+      return updatedMovies;
+    });
   }
 
-  // Update the passed movie's title in want to watch list
-  // TODO: Add error handling for the following scenarios:
-  // 1. If the title is empty
-  // 2. If the title is already in the want to watch movies list
-  function handleUpdateWantToWatchMovie(id: number, title: string) {
-    let updatedMovies = wantToWatchMovies.map(movie => {
-      if (movie.id === id) {
-        return { ...movie, title: title };
-      }
-      return movie;
+  function handleUpdateWantToWatchMovie(id: string, title: string) {
+    setWantToWatchMovies(prevMovies => {
+      let updatedMovies = prevMovies.map(movie => {
+        if (movie.id === id) {
+          return { ...movie, title: title };
+        }
+        return movie;
+      });
+      setActiveTab(
+        <WantToWatchView 
+          wantToWatchMovies={updatedMovies}
+          updateMovie={handleUpdateWantToWatchMovie}
+          deleteMovie={handleDeleteWantToWatchMovie}
+        />
+      );
+      return updatedMovies;
     });
-    setWantToWatchMovies(updatedMovies);
-    setActiveTab(
-      <WantToWatchView 
-        wantToWatchMovies={updatedMovies}
-        updateMovie={handleUpdateWantToWatchMovie}
-        deleteMovie={handleDeleteWantToWatchMovie}
-      />
-    )
   }
 
   // Delete the movie with the passed id from the want to watch list
-  function handleDeleteWantToWatchMovie(id: number) {
-    let updatedMovies = wantToWatchMovies.filter(movie => movie.id !== id);
-    setWantToWatchMovies(updatedMovies);
-    setActiveTab(
-      <WantToWatchView 
-        wantToWatchMovies={updatedMovies}
-        updateMovie={handleUpdateWantToWatchMovie}
-        deleteMovie={handleDeleteWantToWatchMovie}
-      />
-    )
+  function handleDeleteWantToWatchMovie(id: string) {
+    setWantToWatchMovies(prevMovies => {
+      let updatedMovies = prevMovies.filter(movie => movie.id !== id);
+      setActiveTab(
+        <WantToWatchView 
+          wantToWatchMovies={updatedMovies}
+          updateMovie={handleUpdateWantToWatchMovie}
+          deleteMovie={handleDeleteWantToWatchMovie}
+        />
+      );
+      return updatedMovies;
+    });
   }
 
   return (
