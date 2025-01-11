@@ -96,15 +96,17 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: 50,
         alignItems: 'center',
-        padding: 20,
+        paddingHorizontal: 20,
     },
     sectionTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 65,
         textAlign: 'center',
+        marginTop: -35
     },
     inputContainer: {
         width: '100%',
