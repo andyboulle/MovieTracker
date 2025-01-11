@@ -22,13 +22,6 @@ function App(): React.JSX.Element {
     setActiveTab(view);
   }
 
-  // Add a new movie to the watched movies list
-  // TODO: Add error handling for the following scenarios:
-  // 1. If the title is empty
-  // 2. If the score is not a number
-  // 3. If the score is empty
-  // 4. If the score is not between 0 and 10
-  // 5. If the title is already in the watched movies list
   function handleAddMovieToWatched(title: string, score:number) {
     let newMovie = {
       id: watchedMovies.length + 2,
@@ -38,10 +31,6 @@ function App(): React.JSX.Element {
     setWatchedMovies([...watchedMovies, newMovie]);
   }
 
-  // Add a new movie to the want to watch movies list
-  // TODO: Add error handling for the following scenarios:
-  // 1. If the title is empty
-  // 2. If the title is already in the want to watch movies list
   function handleAddToWantToWatch(title: string) {
     let newMovie = {
       id: wantToWatchMovies.length + 2,

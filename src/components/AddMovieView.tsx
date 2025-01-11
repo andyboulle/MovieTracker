@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, Alert } from 'react-native'
 
 interface AddMovieViewProps {
     addMovieToWatched: (title: string, score: number) => void,
@@ -14,11 +14,32 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
 
     function handleAddMovie() {
         if (listToAdd === 'watched') {
-            addMovieToWatched(title, parseFloat(score))
+            if (!title) {
+                Alert.alert('Title is required')
+                return
+            } else if (!score) {
+                Alert.alert('Score is required')
+                return
+            } else if (isNaN(parseFloat(score))) {
+                Alert.alert('Score must be a number')
+                return
+            } else if (parseFloat(score) < 0 || parseFloat(score) > 10) {
+                Alert.alert('Score must be between 0 and 10')
+                return
+            } else {
+                addMovieToWatched(title, parseFloat(score))
+                setSuccessMessageVisible(true)
+            }
             setTitle('')
             setScore('')
         } else {
-            addMovieToWantToWatch(title)
+            if (!title) {
+                Alert.alert('Title is required')
+                return
+            } else {
+                addMovieToWantToWatch(title)
+                setSuccessMessageVisible(true)
+            }
             setTitle('')
         }
         setSuccessMessageVisible(true)
