@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,8 +15,30 @@ export default function WatchedMovieRow({ movie, updateMovie, deleteMovie }: Wat
     const [score, setScore] = useState(movie.score.toString());
 
     function handleUpdate() {
-        updateMovie(movie.id, title, parseFloat(score));
-        setModalVisible(false);
+        if (!title) {
+            setTitle(movie.title);
+            setScore(movie.score.toString());
+            Alert.alert('Title is required');
+            return;
+        } else if (!score) {
+            setTitle(movie.title);
+            setScore(movie.score.toString());
+            Alert.alert('Score is required');
+            return;
+        } else if (isNaN(parseFloat(score))) {
+            setTitle(movie.title);
+            setScore(movie.score.toString());
+            Alert.alert('Score must be a number');
+            return;
+        } else if (parseFloat(score) < 0 || parseFloat(score) > 10) {
+            setTitle(movie.title);
+            setScore(movie.score.toString());
+            Alert.alert('Score must be between 0 and 10');
+            return;
+        } else {
+            updateMovie(movie.id, title, parseFloat(score));
+            setModalVisible(false);
+        }
     };
 
     function handleDelete() {

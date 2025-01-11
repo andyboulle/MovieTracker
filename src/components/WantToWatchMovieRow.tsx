@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,8 +14,14 @@ export default function WantToWatchMovieRow({ movie, updateMovie, deleteMovie }:
     const [title, setTitle] = useState(movie.title);
 
     const handleUpdate = () => {
-        updateMovie(movie.id, title);
-        setModalVisible(false);
+        if (!title) {
+            setTitle(movie.title);
+            Alert.alert('Title is required');
+            return;
+        } else {
+            updateMovie(movie.id, title);
+            setModalVisible(false);
+        }
     };
 
     const handleDelete = () => {
