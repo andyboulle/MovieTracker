@@ -15,8 +15,11 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
     function handleAddMovie() {
         if (listToAdd === 'watched') {
             addMovieToWatched(title, parseFloat(score))
+            setTitle('')
+            setScore('')
         } else {
             addMovieToWantToWatch(title)
+            setTitle('')
         }
         setSuccessMessageVisible(true)
     }
