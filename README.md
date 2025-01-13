@@ -7,9 +7,9 @@ This is a ReactNative application for easily tracking the movies you watch and w
 - **Add Movie View**: A screen that easily allows you to add movies to your *Watched* movies list or your *Want to Watch* movies list.
 - **Want to Watch View**: A screen listing the names of all the movies you *want to watch* along with an edit button, and a delete button.
 
-<img src="./assets/images/watched-screen.png" alt="Watched Screen" width="300"/>
-<img src="./assets/images/add-movie-screen.png" alt="Add Movie Screen" width="300"/>
-<img src="./assets/images/want-to-watch-screen.png" alt="Want to Watch Screen" width="300"/>
+<img src="./assets/images/watched-screen.png" alt="Watched Screen" width="150"/>
+<img src="./assets/images/add-movie-screen.png" alt="Add Movie Screen" width="150"/>
+<img src="./assets/images/want-to-watch-screen.png" alt="Want to Watch Screen" width="150"/>
 
 ## Getting Started
 
