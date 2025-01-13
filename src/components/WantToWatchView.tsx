@@ -9,7 +9,7 @@ interface WantToWatchViewProps {
 
 export default function WantToWatchView({ wantToWatchMovies, updateMovie, deleteMovie }: WantToWatchViewProps): React.JSX.Element {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.sectionTitle}>Want to Watch</Text>
             <FlatList 
                 data={wantToWatchMovies} 
@@ -27,10 +27,16 @@ export default function WantToWatchView({ wantToWatchMovies, updateMovie, delete
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#698F3F',
+    },
     sectionTitle: {
         fontSize: 24,
         fontWeight: 'bold',
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontFamily: 'FjallaOne-Regular',
     }
 })

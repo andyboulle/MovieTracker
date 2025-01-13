@@ -51,10 +51,10 @@ export default function WatchedMovieRow({ movie, updateMovie, deleteMovie }: Wat
             <Text style={styles.movieScore}>{movie.score}</Text>
             <View style={styles.iconContainer}>
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    <FontAwesomeIcon icon={faPenToSquare} color="black" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleDelete()}>
-                    <FontAwesomeIcon icon={faTrash} />
+                    <FontAwesomeIcon icon={faTrash} color="black" />
                 </TouchableOpacity>
             </View>
 
@@ -71,16 +71,18 @@ export default function WatchedMovieRow({ movie, updateMovie, deleteMovie }: Wat
                             value={title}
                             onChangeText={setTitle}
                             placeholder="Title"
+                            placeholderTextColor="#6e6e6e"
                         />
                         <TextInput
                             style={styles.input}
                             value={score}
                             onChangeText={setScore}
                             placeholder="Score"
+                            placeholderTextColor="#6e6e6e"
                             keyboardType="numeric"
                         />
-                        <Button title="Update" onPress={handleUpdate} />
-                        <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                        <Button title="Update" onPress={handleUpdate} color="#698F3F" />
+                        <Button title="Cancel" onPress={() => setModalVisible(false)} color="#698F3F" />
                     </View>
                 </View>
             </Modal>
@@ -95,17 +97,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        borderBottomColor: '#698F3F',
+        backgroundColor: '#FFFFFF',
     },
     movieTitle: {
         flex: 3,
         fontSize: 16,
+        color: 'black',
+        fontWeight: 'bold',
     },
     movieScore: {
         flex: 1,
         fontSize: 16,
         textAlign: 'center',
-        marginRight: 10, // Add margin to separate from icons
+        marginRight: 10, 
+        color: 'black',
+        fontWeight: 'bold',
     },
     iconContainer: {
         flex: 1,
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
     modalView: {
         width: 300,
         padding: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FFFFFF',
         borderRadius: 10,
         alignItems: 'center',
     },
@@ -130,7 +137,8 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#6e6e6e',
         borderRadius: 5,
+        color: '#000000',
     },
 });

@@ -30,8 +30,8 @@ export default function NavBar({ watchedMovies, wantToWatchMovies, changeTab, up
                     />
                 )}
             >
-                <FontAwesomeIcon icon={faCircleCheck} />
-                <Text>Watched</Text>
+                <FontAwesomeIcon icon={faCircleCheck} color="#FFFFFF" />
+                <Text style={styles.tabText}>Watched</Text>
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.tab} 
@@ -42,8 +42,8 @@ export default function NavBar({ watchedMovies, wantToWatchMovies, changeTab, up
                     />
                 )}
             >
-                <FontAwesomeIcon icon={faSquarePlus} />
-                <Text>Add Movie</Text>
+                <FontAwesomeIcon icon={faSquarePlus} color="#FFFFFF" />
+                <Text style={styles.tabText}>Add Movie</Text>
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.tab} 
@@ -55,8 +55,8 @@ export default function NavBar({ watchedMovies, wantToWatchMovies, changeTab, up
                     />
                 )}
             >
-                <FontAwesomeIcon icon={faClock} />
-                <Text>Want to Watch</Text>
+                <FontAwesomeIcon icon={faClock} color="#FFFFFF" />
+                <Text style={styles.tabText}>Want to Watch</Text>
             </TouchableOpacity>
         </View>
     );
@@ -68,11 +68,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#5d8038',
     },
     tab: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    tabText: {
+        color: '#FFFFFF',
+        marginTop: 5,
     },
 });

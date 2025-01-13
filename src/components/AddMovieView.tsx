@@ -68,26 +68,30 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
                     </Text>
                 </TouchableOpacity>
             </View>
-            <Text>Title</Text>
+            <Text style={styles.text}>Title</Text>
             <TextInput
                 style={styles.input}
                 value={title}
                 onChangeText={setTitle}
                 placeholder='Title'
+                placeholderTextColor="#6e6e6e"
             />
             {listToAdd === 'watched' && (
                 <View style={styles.inputContainer}>
-                    <Text>Score</Text>
+                    <Text style={styles.text}>Score</Text>
                     <TextInput
                         style={styles.input}
                         value={score}
                         onChangeText={setScore}
                         placeholder='Score'
+                        placeholderTextColor="#6e6e6e"
                         keyboardType='numeric'
                     />
                 </View>
             )}
-            <Button title='Add Movie' onPress={handleAddMovie}/>
+            <TouchableOpacity style={styles.button} onPress={handleAddMovie}>
+                <Text style={styles.buttonText}>Add Movie</Text>
+            </TouchableOpacity>
             {successMessageVisible && <Text style={styles.successMessage}>Movie added successfully</Text>}
         </View>
     )
@@ -100,13 +104,16 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         alignItems: 'center',
         paddingHorizontal: 20,
+        backgroundColor: '#698F3F',
     },
     sectionTitle: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 65,
         textAlign: 'center',
-        marginTop: -35
+        marginTop: -35,
+        color: '#FFFFFF',
+        fontFamily: 'FjallaOne-Regular',
     },
     inputContainer: {
         width: '100%',
@@ -117,14 +124,16 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#6e6e6e',
         borderRadius: 5,
+        backgroundColor: '#FFFFFF',
     },
     addToText: {
         fontSize: 18,
         fontWeight: 'bold',
         marginVertical: 20,
         textAlign: 'center',
+        color: '#FFFFFF',
     },
     selectionContainer: {
         flexDirection: 'row',
@@ -138,18 +147,35 @@ const styles = StyleSheet.create({
     },
     selectionText: {
         fontSize: 16,
+        color: '#FFFFFF',
     },
     selectionTextBold: {
         fontSize: 16,
         fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     separator: {
         width: 1,
         height: '100%',
-        backgroundColor: '#ccc',
+        backgroundColor: '#FFFFFF',
+    },
+    button: {
+        backgroundColor: '#FFFFFF',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 20,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: 'black',
+        fontWeight: 'bold',
     },
     successMessage: {
-        color: 'green',
+        color: '#FFFFFF',
         marginTop: 10,
+    },
+    text: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
     },
 });

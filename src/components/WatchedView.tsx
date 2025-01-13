@@ -9,7 +9,7 @@ interface WatchedViewProps {
 
 export default function WatchedView({ watchedMovies, updateMovie, deleteMovie }: WatchedViewProps): React.JSX.Element {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.sectionTitle}>Watched</Text>
             <FlatList 
                 data={watchedMovies} 
@@ -27,10 +27,16 @@ export default function WatchedView({ watchedMovies, updateMovie, deleteMovie }:
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#698F3F',
+    },
     sectionTitle: {
         fontSize: 24,
         fontWeight: 'bold',
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontFamily: 'FjallaOne-Regular',
     }
 })

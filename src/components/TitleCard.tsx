@@ -1,14 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-    titleCard: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        padding: 10
-    }
-});
-
 export default function TitleCard(): React.JSX.Element {
     return (
         <View>
@@ -18,3 +9,14 @@ export default function TitleCard(): React.JSX.Element {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    titleCard: {
+        fontSize: 36,
+        fontFamily: 'FjallaOne-Regular',
+        textAlign: 'center',
+        padding: 10,
+        color: '#FFFFFF',
+        backgroundColor: '#698F3F',
+    }
+});

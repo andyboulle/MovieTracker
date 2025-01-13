@@ -33,10 +33,10 @@ export default function WantToWatchMovieRow({ movie, updateMovie, deleteMovie }:
             <Text style={styles.movieTitle}>{movie.title}</Text>
             <View style={styles.iconContainer}>
                 <TouchableOpacity style={styles.icon} onPress={() => setModalVisible(true)}>
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    <FontAwesomeIcon icon={faPenToSquare} color="black" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon} onPress={handleDelete}>
-                    <FontAwesomeIcon icon={faTrash} />
+                    <FontAwesomeIcon icon={faTrash} color="black" />
                 </TouchableOpacity>
             </View>
 
@@ -53,9 +53,10 @@ export default function WantToWatchMovieRow({ movie, updateMovie, deleteMovie }:
                             value={title}
                             onChangeText={setTitle}
                             placeholder="Title"
+                            placeholderTextColor="#6e6e6e"
                         />
-                        <Button title="Update" onPress={handleUpdate} />
-                        <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                        <Button title="Update" onPress={handleUpdate} color="#698F3F" />
+                        <Button title="Cancel" onPress={() => setModalVisible(false)} color="#698F3F" />
                     </View>
                 </View>
             </Modal>
@@ -70,11 +71,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        borderBottomColor: '#698F3F',
+        backgroundColor: '#FFFFFF',
     },
     movieTitle: {
         flex: 3,
         fontSize: 16,
+        color: 'black',
+        fontWeight: 'bold',
     },
     iconContainer: {
         flex: 1,
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     modalView: {
         width: 300,
         padding: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FFFFFF',
         borderRadius: 10,
         alignItems: 'center',
     },
@@ -102,7 +106,8 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#6e6e6e',
         borderRadius: 5,
+        color: '#000000',
     },
 });
