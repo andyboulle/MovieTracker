@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen'
 import TitleCard from './components/TitleCard';
 import NavBar from './components/NavBar';
 import WatchedView from './components/WatchedView';
@@ -21,6 +22,9 @@ function App(): React.JSX.Element {
   // Load movie lists from storage on app start
   useEffect(() => {
     loadMovieLists();
+    if (Platform.OS === 'android') {
+      SplashScreen.hide();
+    }
   }, [])
 
   useEffect(() => {
