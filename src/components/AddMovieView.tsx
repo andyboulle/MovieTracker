@@ -16,15 +16,19 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
         if (listToAdd === 'watched') {
             if (!title) {
                 Alert.alert('Title is required')
+                setSuccessMessageVisible(false)
                 return
             } else if (!score) {
                 Alert.alert('Score is required')
+                setSuccessMessageVisible(false)
                 return
             } else if (isNaN(parseFloat(score))) {
                 Alert.alert('Score must be a number')
+                setSuccessMessageVisible(false)
                 return
             } else if (parseFloat(score) < 0 || parseFloat(score) > 10) {
                 Alert.alert('Score must be between 0 and 10')
+                setSuccessMessageVisible(false)
                 return
             } else {
                 addMovieToWatched(title, parseFloat(score))
@@ -35,6 +39,7 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
         } else {
             if (!title) {
                 Alert.alert('Title is required')
+                setSuccessMessageVisible(false)
                 return
             } else {
                 addMovieToWantToWatch(title)
@@ -45,6 +50,11 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
         setSuccessMessageVisible(true)
     }
 
+    function handleSwitchListToAdd() {
+        setListToAdd(listToAdd === 'watched' ? 'wantToWatch' : 'watched')
+        setSuccessMessageVisible(false)
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.sectionTitle}>Add Movie</Text>
@@ -52,7 +62,7 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
             <View style={styles.selectionContainer}>
                 <TouchableOpacity 
                     style={styles.selection}
-                    onPress={() => setListToAdd('watched')}
+                    onPress={() => handleSwitchListToAdd()}
                 >
                     <Text style={listToAdd === 'watched' ? styles.selectionTextBold : styles.selectionText}>
                         Watched
@@ -61,7 +71,7 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
                 <View style={styles.separator} />
                 <TouchableOpacity 
                     style={styles.selection}
-                    onPress={() => setListToAdd('wantToWatch')}
+                    onPress={() => handleSwitchListToAdd()}
                 >
                     <Text style={listToAdd === 'wantToWatch' ? styles.selectionTextBold : styles.selectionText}>
                         Want to Watch

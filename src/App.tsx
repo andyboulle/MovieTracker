@@ -1,21 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TitleCard from './components/TitleCard';
 import NavBar from './components/NavBar';
 import WatchedView from './components/WatchedView';
 import WantToWatchView from './components/WantToWatchView';
+import AddMovieView from './components/AddMovieView';
 
 function App(): React.JSX.Element {
   const [watchedMovies, setWatchedMovies] = useState([]);
   const [wantToWatchMovies, setWantToWatchMovies] = useState([]);
 
   let [activeTab, setActiveTab] = useState(
-    <WatchedView 
-      watchedMovies={watchedMovies} 
-      updateMovie={handleUpdateWatchedMovie} 
-      deleteMovie={handleDeleteWatchedMovie}
+    <AddMovieView
+      addMovieToWatched={handleAddMovieToWatched}
+      addMovieToWantToWatch={handleAddToWantToWatch}
     />
   );
+
+  // Load movie lists from storage on app start
+  useEffect(() => {
+    loadMovieLists();
+  }, [])
+
+  useEffect(() => {
+    storeMovieLists();
+  }, [watchedMovies, wantToWatchMovies])
+
+  // Save watched and want to watch movie lists to storage for future use
+  function storeMovieLists() {
+    AsyncStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
+    AsyncStorage.setItem('wantToWatchMovies', JSON.stringify(wantToWatchMovies));
+  }
+
+  // Load watched and want to watch movie lists from storage
+  function loadMovieLists() {
+    AsyncStorage.getItem('watchedMovies').then(data => {
+      if (data) {
+        setWatchedMovies(JSON.parse(data));
+      }
+    });
+    AsyncStorage.getItem('wantToWatchMovies').then(data => {
+      if (data) {
+        setWantToWatchMovies(JSON.parse(data));
+      }
+    });
+  }
 
   // Change the active tab to the view passed
   function handleChangeTab(view: React.JSX.Element) {
