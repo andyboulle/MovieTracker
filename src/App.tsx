@@ -143,9 +143,7 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.titleCardContainer}>
-        <TitleCard />
-      </View>
+      <TitleCard />
       <View style={styles.contentContainer}>
         {activeTab}
       </View>
@@ -169,10 +167,7 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-  },
-  titleCardContainer: {
-    flex: 1,
+    backgroundColor: '#698F3F',
   },
   contentContainer: {
     flex: 8,
