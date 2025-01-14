@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     titleCard: {
-        fontSize: 36,
+        fontSize: 45,
         fontFamily: 'FjallaOne-Regular',
         textAlign: 'center',
         color: '#FFFFFF',

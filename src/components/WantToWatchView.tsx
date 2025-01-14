@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#698F3F',
     },
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: 'bold',
         margin: 10,
         textAlign: 'center',

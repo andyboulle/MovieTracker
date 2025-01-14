@@ -117,9 +117,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#698F3F',
     },
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: 'bold',
-        marginBottom: 65,
+        marginBottom: 30,
         textAlign: 'center',
         marginTop: -35,
         color: '#FFFFFF',
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     addToText: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
         marginVertical: 20,
         textAlign: 'center',
@@ -156,11 +156,11 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     selectionText: {
-        fontSize: 16,
+        fontSize: 20,
         color: '#FFFFFF',
     },
     selectionTextBold: {
-        fontSize: 16,
+        fontSize: 22,
         fontWeight: 'bold',
         color: '#FFFFFF',
     },
@@ -187,5 +187,6 @@ const styles = StyleSheet.create({
     text: {
         color: '#FFFFFF',
         fontWeight: 'bold',
+        fontSize: 16,
     },
 });
