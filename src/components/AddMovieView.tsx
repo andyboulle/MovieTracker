@@ -85,6 +85,7 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
                 onChangeText={setTitle}
                 placeholder='Title'
                 placeholderTextColor="#6e6e6e"
+                returnKeyType="done"
             />
             {listToAdd === 'watched' && (
                 <View style={styles.inputContainer}>
@@ -96,6 +97,7 @@ export default function AddMovieView({ addMovieToWatched, addMovieToWantToWatch 
                         placeholder='Score'
                         placeholderTextColor="#6e6e6e"
                         keyboardType='numeric'
+                        returnKeyType="done"
                     />
                 </View>
             )}
